@@ -1,0 +1,98 @@
+openapi: 3.0.0
+info:
+  title: Flask API for Data Management
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /data:
+    get:
+      summary: Retrieve all data
+      responses:
+        '200':
+          description: Data retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+        '500':
+          description: Error retrieving data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  /upload:
+    post:
+      summary: Add new data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_data:
+                  type: string
+      responses:
+        '200':
+          description: Data added successfully
+        '400':
+          description: Error adding data
+    put:
+      summary: Add new data (alternative method)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                new_data:
+                  type: string
+      responses:
+        '200':
+          description: Data added successfully
+        '400':
+          description: Error adding data
+  /update:
+    patch:
+      summary: Update existing data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                old_data:
+                  type: string
+                new_data:
+                  type: string
+      responses:
+        '200':
+          description: Data updated successfully
+        '404':
+          description: Data not found
+  /erase:
+    delete:
+      summary: Delete data
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: string
+      responses:
+        '200':
+          description: Data deleted successfully
+        '404':
+          description: Data not found
